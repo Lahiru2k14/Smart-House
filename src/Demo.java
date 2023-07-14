@@ -64,15 +64,9 @@ class AddTime {
         this.endMinute = endMinute;
     }
 
-
 }
 
-
-
-
-
-
-//----------------------------------TV Living Room--------------------------------//
+//----------------------------------TV Living Room----------------------------------//
 
 class DisplayTVLRoom extends JFrame implements SwitchActionObserver{
     private JLabel tvlLabel;
@@ -95,7 +89,7 @@ class DisplayTVLRoom extends JFrame implements SwitchActionObserver{
     }
 }
 
-//------------------------------Speaker Living Room--------------------------------//
+//------------------------------Speaker Living Room---------------------------------//
 
 class DisplaySPLRoom extends JFrame implements SwitchActionObserver{
     private JLabel splLabel;
@@ -118,7 +112,7 @@ class DisplaySPLRoom extends JFrame implements SwitchActionObserver{
     }
 }
 
-//-------------------------------Window Living Room--------------------------------//
+//-------------------------------Window Living Room---------------------------------//
 
 class DisplayWDLRoom extends JFrame implements SwitchActionObserver{
     private JLabel wdlLabel;
@@ -141,7 +135,7 @@ class DisplayWDLRoom extends JFrame implements SwitchActionObserver{
     }
 }
 
-//-----------------------------------TV Dining Room--------------------------------//
+//-----------------------------------TV Dining Room----------------------------------//
 
 class DisplayTVDRoom extends JFrame implements SwitchActionObserver{
     private JLabel tvdLabel;
@@ -163,7 +157,7 @@ class DisplayTVDRoom extends JFrame implements SwitchActionObserver{
 
     }
 }
-//-----------------------------Setting Window--------------------------------//
+//-----------------------------Setting Window----------------------------------------//
 
 class DisplaySetting extends JFrame {
 
@@ -308,10 +302,13 @@ class TVLRoomController extends JFrame {
 
                 AddTime addTime= new AddTime(ssp1,ssp2,esp1,esp2);
 
+                if(addTimeList.isEmpty()){
+                    lm.clear();
+                }
                 addTimeList.add(addTime);
 
                 String row ="Start at: "+ssp1+"."+ssp2+" "+"Ends at:"+esp1+"."+esp2;
-                lm.clear();
+
                 lm.addElement(row);
 
             }
@@ -364,13 +361,151 @@ class TVLRoomController extends JFrame {
 
 class SPLRoomController extends JFrame {
 
+    private JList list = null;
+    DefaultListModel lm = null;
+
     SPLRoomController () {
-        setSize(300, 300);
+        setSize(650, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Speaker Living Room");
+        setLayout(new BorderLayout());
         setLocationRelativeTo(null);
-        setLayout(new FlowLayout());
         setVisible(true);
+
+        JPanel controller2ListPenal = new JPanel();
+        controller2ListPenal .setLayout(new GridLayout());
+
+        ArrayList<AddTime> addTimeList = new ArrayList();
+
+        JPanel controller2TimePenal = new JPanel();
+
+        controller2TimePenal.setLayout(new FlowLayout());
+
+        //-------------------------------------------------------------------------------//
+
+        JLabel controller2StartHourLbl =new JLabel("Start Hour:");
+        controller2StartHourLbl.setFont(new Font("", 1, 15));
+
+        SpinnerModel startHourValue = new SpinnerNumberModel(00, //initial value
+                00, //minimum value
+                24, //maximum value
+                1); //step
+        JSpinner controller2StartHourSpinner = new JSpinner(startHourValue);
+        controller2StartHourSpinner .setBounds(10,100,20,10);
+        controller2StartHourSpinner .setEditor(
+                new JSpinner.NumberEditor(controller2StartHourSpinner , "00"));
+        controller2StartHourSpinner .setFont(new Font("",1,15));
+
+        JLabel controller2StartMinuteLbl =new JLabel("Start Minute:");
+        controller2StartMinuteLbl.setFont(new Font("", 1, 15));
+
+        SpinnerModel minuteValue = new SpinnerNumberModel(00, //initial value
+                00, //minimum value
+                60, //maximum value
+                1); //step
+        JSpinner controller2StartMinuteSpinner = new JSpinner(minuteValue);
+        controller2StartMinuteSpinner.setBounds(100,100,20,10);
+        controller2StartMinuteSpinner.setEditor(
+                new JSpinner.NumberEditor(controller2StartMinuteSpinner, "00"));
+        controller2StartMinuteSpinner.setFont(new Font("",1,15));
+
+        //---------------------------------------------------------------------------------------//
+
+        JLabel controller2EndHourLbl =new JLabel("End Hour:");
+        controller2EndHourLbl.setFont(new Font("", 1, 15));
+
+        SpinnerModel endHourValue = new SpinnerNumberModel(00, //initial value
+                00, //minimum value
+                24, //maximum value
+                1); //step
+        JSpinner controller2EndHourSpinner = new JSpinner(endHourValue);
+        controller2EndHourSpinner.setBounds(100,100,20,10);
+        controller2EndHourSpinner.setEditor(
+                new JSpinner.NumberEditor(controller2EndHourSpinner, "00"));
+        controller2EndHourSpinner.setFont(new Font("",1,15));
+
+        JLabel controller2EndHourMinuteLbl =new JLabel("Minute:");
+        controller2EndHourMinuteLbl.setFont(new Font("", 1, 15));
+
+        SpinnerModel endMinuteValue =
+                new SpinnerNumberModel(00, //initial value
+                        00, //minimum value
+                        60, //maximum value
+                        1); //step
+        JSpinner controller2EndMinuteSpinner = new JSpinner(endMinuteValue);
+        controller2EndMinuteSpinner.setBounds(100,100,20,10);
+        controller2EndMinuteSpinner.setEditor(
+                new JSpinner.NumberEditor(controller2EndMinuteSpinner, "00"));
+        controller2EndMinuteSpinner.setFont(new Font("",1,15));
+
+        //---------------------------------------------------------------------------------------//
+
+        JButton controller2SetBtn =new JButton("Set");
+        controller2SetBtn.setFont(new Font("",1,15));
+        controller2SetBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int ssp1= (int) controller2StartHourSpinner .getValue();
+                int ssp2= (int) controller2StartMinuteSpinner .getValue();
+                int esp1= (int) controller2EndHourSpinner .getValue();
+                int esp2= (int) controller2EndMinuteSpinner .getValue();
+
+                AddTime addTime= new AddTime(ssp1,ssp2,esp1,esp2);
+
+                if(addTimeList.isEmpty()){
+                    lm.clear();
+                }
+
+                addTimeList.add(addTime);
+
+                String row ="Start at: "+ssp1+"."+ssp2+" "+"Ends at:"+esp1+"."+esp2;
+
+                lm.addElement(row);
+
+            }
+        });
+
+        String a,b,c,d;
+
+        lm = new DefaultListModel();
+
+        if(addTimeList.isEmpty()){
+            a = b = c = d = " - ";
+            String row ="Start at: "+a+"."+b+" "+"Ends at:"+c+"."+d;
+            lm.addElement(row);
+        }else{
+            for (AddTime i: addTimeList){
+                a = String.valueOf(i.getStartHour());
+                b = String.valueOf(i.getStartMinute());
+                c = String.valueOf(i.getEndHour());
+                d = String.valueOf(i.getEndMinute());
+
+                String row ="Start at: "+a+"."+b+" "+"Ends at:"+c+"."+d;
+                lm.addElement(row);
+
+            }
+        }
+
+        list = new JList(lm);
+
+
+
+        controller2TimePenal.add(controller2StartHourLbl);
+        controller2TimePenal.add(controller2StartHourSpinner);
+        controller2TimePenal.add(controller2StartMinuteLbl);
+        controller2TimePenal.add(controller2StartMinuteSpinner);
+
+        controller2TimePenal.add(controller2EndHourLbl);
+        controller2TimePenal.add(controller2EndHourSpinner);
+        controller2TimePenal.add(controller2EndHourMinuteLbl);
+        controller2TimePenal.add(controller2EndMinuteSpinner);
+
+        controller2TimePenal.add(controller2SetBtn);
+
+        controller2ListPenal.add(new JScrollPane(list), BorderLayout.CENTER);
+
+        add("Center",controller2ListPenal);
+        add("South",controller2TimePenal);
 
     }
 
@@ -381,13 +516,150 @@ class SPLRoomController extends JFrame {
 
 class WDLRoomController extends JFrame {
 
+    private JList list = null;
+    DefaultListModel lm = null;
+
+
     WDLRoomController () {
-        setSize(300, 300);
+        setSize(650, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Window Living Room");
+        setLayout(new BorderLayout());
         setLocationRelativeTo(null);
-        setLayout(new FlowLayout());
-        setVisible(true);
+        setVisible(true);;
+
+        JPanel controller3ListPenal = new JPanel();
+        controller3ListPenal .setLayout(new GridLayout());
+
+        ArrayList<AddTime> addTimeList = new ArrayList();
+
+        JPanel controller3TimePenal = new JPanel();
+
+        controller3TimePenal.setLayout(new FlowLayout());
+
+        //-------------------------------------------------------------------------------//
+
+        JLabel controller3StartHourLbl =new JLabel("Start Hour:");
+        controller3StartHourLbl.setFont(new Font("", 1, 15));
+
+        SpinnerModel startHourValue = new SpinnerNumberModel(00, //initial value
+                00, //minimum value
+                24, //maximum value
+                1); //step
+        JSpinner controller3StartHourSpinner = new JSpinner(startHourValue);
+        controller3StartHourSpinner .setBounds(10,100,20,10);
+        controller3StartHourSpinner .setEditor(
+                new JSpinner.NumberEditor(controller3StartHourSpinner , "00"));
+        controller3StartHourSpinner .setFont(new Font("",1,15));
+
+        JLabel controller3StartMinuteLbl =new JLabel("Start Minute:");
+        controller3StartMinuteLbl.setFont(new Font("", 1, 15));
+
+        SpinnerModel minuteValue = new SpinnerNumberModel(00, //initial value
+                00, //minimum value
+                60, //maximum value
+                1); //step
+        JSpinner controller3StartMinuteSpinner = new JSpinner(minuteValue);
+        controller3StartMinuteSpinner.setBounds(100,100,20,10);
+        controller3StartMinuteSpinner.setEditor(
+                new JSpinner.NumberEditor(controller3StartMinuteSpinner, "00"));
+        controller3StartMinuteSpinner.setFont(new Font("",1,15));
+
+        //---------------------------------------------------------------------------------------//
+
+        JLabel controller3EndHourLbl =new JLabel("End Hour:");
+        controller3EndHourLbl.setFont(new Font("", 1, 15));
+
+        SpinnerModel endHourValue = new SpinnerNumberModel(00, //initial value
+                00, //minimum value
+                24, //maximum value
+                1); //step
+        JSpinner controller3EndHourSpinner = new JSpinner(endHourValue);
+        controller3EndHourSpinner.setBounds(100,100,20,10);
+        controller3EndHourSpinner.setEditor(
+                new JSpinner.NumberEditor(controller3EndHourSpinner, "00"));
+        controller3EndHourSpinner.setFont(new Font("",1,15));
+
+        JLabel controller3EndHourMinuteLbl =new JLabel("Minute:");
+        controller3EndHourMinuteLbl.setFont(new Font("", 1, 15));
+
+        SpinnerModel endMinuteValue =
+                new SpinnerNumberModel(00, //initial value
+                        00, //minimum value
+                        60, //maximum value
+                        1); //step
+        JSpinner controller3EndMinuteSpinner = new JSpinner(endMinuteValue);
+        controller3EndMinuteSpinner.setBounds(100,100,20,10);
+        controller3EndMinuteSpinner.setEditor(
+                new JSpinner.NumberEditor(controller3EndMinuteSpinner, "00"));
+        controller3EndMinuteSpinner.setFont(new Font("",1,15));
+
+        //---------------------------------------------------------------------------------------//
+
+        JButton controller3SetBtn =new JButton("Set");
+        controller3SetBtn.setFont(new Font("",1,15));
+        controller3SetBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int ssp1= (int) controller3StartHourSpinner .getValue();
+                int ssp2= (int) controller3StartMinuteSpinner .getValue();
+                int esp1= (int) controller3EndHourSpinner .getValue();
+                int esp2= (int) controller3EndMinuteSpinner .getValue();
+
+                AddTime addTime= new AddTime(ssp1,ssp2,esp1,esp2);
+
+                if(addTimeList.isEmpty()){
+                    lm.clear();
+                }
+
+                addTimeList.add(addTime);
+
+                String row ="Start at: "+ssp1+"."+ssp2+" "+"Ends at:"+esp1+"."+esp2;
+
+                lm.addElement(row);
+
+            }
+        });
+
+        String a,b,c,d;
+
+        lm = new DefaultListModel();
+
+        if(addTimeList.isEmpty()){
+            a = b = c = d = " - ";
+            String row ="Start at: "+a+"."+b+" "+"Ends at:"+c+"."+d;
+            lm.addElement(row);
+        }else{
+            for (AddTime i: addTimeList){
+                a = String.valueOf(i.getStartHour());
+                b = String.valueOf(i.getStartMinute());
+                c = String.valueOf(i.getEndHour());
+                d = String.valueOf(i.getEndMinute());
+
+                String row ="Start at: "+a+"."+b+" "+"Ends at:"+c+"."+d;
+                lm.addElement(row);
+
+            }
+        }
+
+        list = new JList(lm);
+
+        controller3TimePenal.add(controller3StartHourLbl);
+        controller3TimePenal.add(controller3StartHourSpinner);
+        controller3TimePenal.add(controller3StartMinuteLbl);
+        controller3TimePenal.add(controller3StartMinuteSpinner);
+
+        controller3TimePenal.add(controller3EndHourLbl);
+        controller3TimePenal.add(controller3EndHourSpinner);
+        controller3TimePenal.add(controller3EndHourMinuteLbl);
+        controller3TimePenal.add(controller3EndMinuteSpinner);
+
+        controller3TimePenal.add(controller3SetBtn);
+
+        controller3ListPenal.add(new JScrollPane(list), BorderLayout.CENTER);
+
+        add("Center",controller3ListPenal);
+        add("South",controller3TimePenal);
 
     }
 
@@ -398,28 +670,160 @@ class WDLRoomController extends JFrame {
 
 class TVDRoomController extends JFrame {
 
+    private JList list = null;
+    DefaultListModel lm = null;
+
     TVDRoomController () {
-        setSize(300, 300);
+        setSize(650, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("TV Dining Room");
+        setLayout(new BorderLayout());
         setLocationRelativeTo(null);
-        setLayout(new FlowLayout());
         setVisible(true);
+        JPanel controller4ListPenal = new JPanel();
+        controller4ListPenal .setLayout(new GridLayout());
+
+        ArrayList<AddTime> addTimeList = new ArrayList();
+
+        JPanel controller4TimePenal = new JPanel();
+
+        controller4TimePenal.setLayout(new FlowLayout());
+
+        //-------------------------------------------------------------------------------//
+
+        JLabel controller4StartHourLbl =new JLabel("Start Hour:");
+        controller4StartHourLbl.setFont(new Font("", 1, 15));
+
+        SpinnerModel startHourValue = new SpinnerNumberModel(00, //initial value
+                00, //minimum value
+                24, //maximum value
+                1); //step
+        JSpinner controller4StartHourSpinner = new JSpinner(startHourValue);
+        controller4StartHourSpinner .setBounds(10,100,20,10);
+        controller4StartHourSpinner .setEditor(
+                new JSpinner.NumberEditor(controller4StartHourSpinner , "00"));
+        controller4StartHourSpinner .setFont(new Font("",1,15));
+
+        JLabel controller4StartMinuteLbl =new JLabel("Start Minute:");
+        controller4StartMinuteLbl.setFont(new Font("", 1, 15));
+
+        SpinnerModel minuteValue = new SpinnerNumberModel(00, //initial value
+                00, //minimum value
+                60, //maximum value
+                1); //step
+        JSpinner controller4StartMinuteSpinner = new JSpinner(minuteValue);
+        controller4StartMinuteSpinner.setBounds(100,100,20,10);
+        controller4StartMinuteSpinner.setEditor(
+                new JSpinner.NumberEditor(controller4StartMinuteSpinner, "00"));
+        controller4StartMinuteSpinner.setFont(new Font("",1,15));
+
+        //---------------------------------------------------------------------------------------//
+
+        JLabel controller4EndHourLbl =new JLabel("End Hour:");
+        controller4EndHourLbl.setFont(new Font("", 1, 15));
+
+        SpinnerModel endHourValue = new SpinnerNumberModel(00, //initial value
+                00, //minimum value
+                24, //maximum value
+                1); //step
+        JSpinner controller4EndHourSpinner = new JSpinner(endHourValue);
+        controller4EndHourSpinner.setBounds(100,100,20,10);
+        controller4EndHourSpinner.setEditor(
+                new JSpinner.NumberEditor(controller4EndHourSpinner, "00"));
+        controller4EndHourSpinner.setFont(new Font("",1,15));
+
+        JLabel controller4EndHourMinuteLbl =new JLabel("Minute:");
+        controller4EndHourMinuteLbl.setFont(new Font("", 1, 15));
+
+        SpinnerModel endMinuteValue =
+                new SpinnerNumberModel(00, //initial value
+                        00, //minimum value
+                        60, //maximum value
+                        1); //step
+        JSpinner controller4EndMinuteSpinner = new JSpinner(endMinuteValue);
+        controller4EndMinuteSpinner.setBounds(100,100,20,10);
+        controller4EndMinuteSpinner.setEditor(
+                new JSpinner.NumberEditor(controller4EndMinuteSpinner, "00"));
+        controller4EndMinuteSpinner.setFont(new Font("",1,15));
+
+        //---------------------------------------------------------------------------------------//
+
+        JButton controller4SetBtn =new JButton("Set");
+        controller4SetBtn.setFont(new Font("",1,15));
+        controller4SetBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int ssp1= (int) controller4StartHourSpinner .getValue();
+                int ssp2= (int) controller4StartMinuteSpinner .getValue();
+                int esp1= (int) controller4EndHourSpinner .getValue();
+                int esp2= (int) controller4EndMinuteSpinner .getValue();
+
+                AddTime addTime= new AddTime(ssp1,ssp2,esp1,esp2);
+
+                if(addTimeList.isEmpty()){
+                    lm.clear();
+                }
+
+                addTimeList.add(addTime);
+
+                String row ="Start at: "+ssp1+"."+ssp2+" "+"Ends at:"+esp1+"."+esp2;
+
+                lm.addElement(row);
+
+            }
+        });
+
+        String a,b,c,d;
+
+        lm = new DefaultListModel();
+
+        if(addTimeList.isEmpty()){
+            a = b = c = d = " - ";
+            String row ="Start at: "+a+"."+b+" "+"Ends at:"+c+"."+d;
+            lm.addElement(row);
+        }else{
+            for (AddTime i: addTimeList){
+                a = String.valueOf(i.getStartHour());
+                b = String.valueOf(i.getStartMinute());
+                c = String.valueOf(i.getEndHour());
+                d = String.valueOf(i.getEndMinute());
+
+                String row ="Start at: "+a+"."+b+" "+"Ends at:"+c+"."+d;
+                lm.addElement(row);
+
+            }
+        }
+
+        list = new JList(lm);
+
+        controller4TimePenal.add(controller4StartHourLbl);
+        controller4TimePenal.add(controller4StartHourSpinner);
+        controller4TimePenal.add(controller4StartMinuteLbl);
+        controller4TimePenal.add(controller4StartMinuteSpinner);
+
+        controller4TimePenal.add(controller4EndHourLbl);
+        controller4TimePenal.add(controller4EndHourSpinner);
+        controller4TimePenal.add(controller4EndHourMinuteLbl);
+        controller4TimePenal.add(controller4EndMinuteSpinner);
+
+        controller4TimePenal.add(controller4SetBtn);
+
+        controller4ListPenal.add(new JScrollPane(list), BorderLayout.CENTER);
+
+        add("Center",controller4ListPenal);
+        add("South",controller4TimePenal);
 
     }
 
 }
 
 
-//---------------------------------Main Switch--------------------------------//
+//---------------------------------Main Switch----------------------------------------//
 
     class DisplaySwitch extends JFrame {
-
     private DisplaySwitchController displaySwitchController;
         private JToggleButton switchBtn;
         private JButton settingBtn;
-
-
         DisplaySwitch(DisplaySwitchController displaySwitchController) {
             setSize(450, 200);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -441,8 +845,6 @@ class TVDRoomController extends JFrame {
                         switchBtn.setText("ON");
                     }
 
-
-
                     String switchAction;
 
                     if (switchBtn.getText().equals("OFF")){
@@ -450,7 +852,6 @@ class TVDRoomController extends JFrame {
                     }else {
                         switchAction = "OFF";
                     }
-
 
                     System.out.println("switch Action -"+ switchAction);
 
@@ -462,16 +863,14 @@ class TVDRoomController extends JFrame {
             settingBtn =new JButton("Settings");
             settingBtn.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent evt){
+
                             new DisplaySetting();
                         }
                     });
 
             settingBtn.setFont(new Font("", 1, 20));
 
-
-            /*------------------------------------------------------------*/
-
-
+            //---------------------------------------------------------------------------------//
 
             JPanel switchMenuTimePenal =new JPanel();
             switchMenuTimePenal.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -486,7 +885,8 @@ class TVDRoomController extends JFrame {
                             1); //step
             JSpinner switchMenuHourSpinner = new JSpinner(valueHour);
             switchMenuHourSpinner.setBounds(100,100,50,30);
-            switchMenuHourSpinner.setEditor(new JSpinner.NumberEditor(switchMenuHourSpinner, "00"));
+            switchMenuHourSpinner.setEditor(
+                    new JSpinner.NumberEditor(switchMenuHourSpinner, "00"));
             switchMenuHourSpinner.setFont(new Font("",1,20));
 
             JLabel switchMenuMinuteLbl =new JLabel("Minute:");
@@ -499,7 +899,8 @@ class TVDRoomController extends JFrame {
                             1); //step
             JSpinner switchMenuMinuteSpinner = new JSpinner(valueMinute);
             switchMenuMinuteSpinner.setBounds(100,100,50,30);
-            switchMenuMinuteSpinner.setEditor(new JSpinner.NumberEditor(switchMenuMinuteSpinner, "00"));
+            switchMenuMinuteSpinner.setEditor(
+                    new JSpinner.NumberEditor(switchMenuMinuteSpinner, "00"));
             switchMenuMinuteSpinner.setFont(new Font("",1,20));
 
             switchMenuTimePenal.add(switchMenuHourLbl);
@@ -507,16 +908,13 @@ class TVDRoomController extends JFrame {
             switchMenuTimePenal.add(switchMenuMinuteLbl);
             switchMenuTimePenal.add(switchMenuMinuteSpinner);
 
-
-
-
             add(switchBtn);
             add(settingBtn);
             add(switchMenuTimePenal);
         }
     }
 
-//-----------------------------Main Switch Controller--------------------------------//
+//--------------------------------------Main Switch Controller-----------------------------------//
 
     class DisplaySwitchController{
     private  SwitchActionObserver [] observerArray=new SwitchActionObserver[0];
@@ -544,16 +942,9 @@ class TVDRoomController extends JFrame {
                 ob.update(switchAction);
             }
         }
-
-
         }
 
-
-
-
-
 //---------------------------------------------------------------------------------------------//
-
 
     class Demo {
         public static void main(String[] args) {
@@ -564,7 +955,6 @@ class TVDRoomController extends JFrame {
             displaySwitchController.addSwitchActionObserver(new DisplaySPLRoom());
             displaySwitchController.addSwitchActionObserver(new DisplayWDLRoom());
             displaySwitchController.addSwitchActionObserver(new DisplayTVDRoom());
-
 
             new DisplaySwitch(displaySwitchController).setVisible(true);
 

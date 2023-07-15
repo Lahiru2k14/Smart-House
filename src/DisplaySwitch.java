@@ -21,7 +21,6 @@ class DisplaySwitch extends JFrame {
 
     static ArrayList<AddTime> addControllerTimeList3 = new ArrayList();
 
-
     static ArrayList<AddTime> addControllerTimeList4 = new ArrayList();
 
 

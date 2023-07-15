@@ -15,9 +15,15 @@ class DisplaySwitch extends JFrame {
     JSpinner switchMenuHourSpinner;
     JSpinner switchMenuMinuteSpinner;
 
-    static ArrayList<AddTime> addMainTimeList = new ArrayList();
+    static ArrayList<AddTime> addControllerTimeList = new ArrayList();
 
-    static ArrayList<AddTime> addMainTimeList2 = new ArrayList();
+    static ArrayList<AddTime> addControllerTimeList2 = new ArrayList();
+
+    static ArrayList<AddTime> addControllerTimeList3 = new ArrayList();
+
+
+    static ArrayList<AddTime> addControllerTimeList4 = new ArrayList();
+
 
     DisplaySwitch(DisplaySwitchController displaySwitchController) {
         setSize(450, 200);
@@ -93,7 +99,6 @@ class DisplaySwitch extends JFrame {
                 setStartTime();
 
 
-
             }
         });
 
@@ -143,7 +148,6 @@ class DisplaySwitch extends JFrame {
         System.out.println();
 
 
-
         for (int i = 0; i < DBConnection.getInstance().addMainTimeList.size(); i++) {
 
             int tVLRStartHourTime = DBConnection.getInstance().getStartTime().get(0).getStartHour();
@@ -152,11 +156,10 @@ class DisplaySwitch extends JFrame {
             int tVLREndHourTime = DBConnection.getInstance().getStartTime().get(0).getEndHour();
             int tVLREndMinuteTime = DBConnection.getInstance().getStartTime().get(0).getEndMinute();
 
-
             if (ssp3 == tVLRStartHourTime & ssp4 == tVLRStartMinuteTime) {
 
-                System.out.println("TVLR Start Time :"+tVLRStartHourTime);
-                System.out.println("TVLR Minute Time :"+tVLRStartMinuteTime);
+                System.out.println("TVLR Start Time :" + tVLRStartHourTime);
+                System.out.println("TVLR Minute Time :" + tVLRStartMinuteTime);
 
                 String startTime = "ON";
 
@@ -166,16 +169,119 @@ class DisplaySwitch extends JFrame {
 
             if (ssp3 == tVLREndHourTime & ssp4 == tVLREndMinuteTime) {
 
-                System.out.println("TVLR Start Time :"+tVLREndHourTime);
-                System.out.println("TVLR Minute Time :"+tVLREndMinuteTime);
+                System.out.println("TVLR Start Time :" + tVLREndHourTime);
+                System.out.println("TVLR Minute Time :" + tVLREndMinuteTime);
 
                 String endTime = "OFF";
 
                 displaySwitchController.setEndTime(endTime);
 
             }
+
         }
 
+        for (int i = 0; i < DBConnection.getInstance().addMainTimeList2.size(); i++) {
+
+            int sPLRStartHourTime = DBConnection.getInstance().getStartTime2().get(0).getStartHour();
+            int sPLRStartMinuteTime = DBConnection.getInstance().getStartTime2().get(0).getStartMinute();
+
+            int sPLREndHourTime = DBConnection.getInstance().getStartTime2().get(0).getEndHour();
+            int sPLREndMinuteTime = DBConnection.getInstance().getStartTime2().get(0).getEndMinute();
+
+
+            if (ssp3 == sPLRStartHourTime & ssp4 == sPLRStartMinuteTime) {
+
+                System.out.println("SPLR Start Time :" + sPLRStartHourTime);
+                System.out.println("SPLR Minute Time :" + sPLRStartMinuteTime);
+
+                String startTime2 = "ON";
+
+                displaySwitchController.setStartTime2(startTime2);
+
+            }
+
+            if (ssp3 == sPLREndHourTime & ssp4 == sPLREndMinuteTime) {
+
+                System.out.println("SPLR Start Time :" + sPLREndHourTime);
+                System.out.println("SPLR Minute Time :" + sPLREndMinuteTime);
+
+                String endTime2 = "OFF";
+
+                displaySwitchController.setEndTime2(endTime2);
+
+            }
+
+        }
+
+        for (int i = 0; i < DBConnection.getInstance().addMainTimeList3.size(); i++) {
+
+            int wDLRStartHourTime = DBConnection.getInstance().getStartTime3().get(0).getStartHour();
+            int wDLRStartMinuteTime = DBConnection.getInstance().getStartTime3().get(0).getStartMinute();
+
+            int wDLREndHourTime = DBConnection.getInstance().getStartTime3().get(0).getEndHour();
+            int wDLREndMinuteTime = DBConnection.getInstance().getStartTime3().get(0).getEndMinute();
+
+
+            if (ssp3 == wDLRStartHourTime & ssp4 == wDLRStartMinuteTime) {
+
+                System.out.println("WDLR Start Time :" + wDLRStartHourTime);
+                System.out.println("WDLR Minute Time :" + wDLRStartMinuteTime);
+
+                String startTime3 = "ON";
+
+                displaySwitchController.setStartTime3(startTime3);
+
+            }
+
+            if (ssp3 == wDLREndHourTime & ssp4 == wDLREndMinuteTime) {
+
+                System.out.println("wDLR Start Time :" + wDLREndHourTime);
+                System.out.println("wDLR Minute Time :" + wDLREndMinuteTime);
+
+                String endTime3 = "OFF";
+
+                displaySwitchController.setEndTime3(endTime3);
+
+            }
+
+
+
+        }
+
+        for (int i = 0; i < DBConnection.getInstance().addMainTimeList4.size(); i++) {
+
+            int tVDRStartHourTime = DBConnection.getInstance().getStartTime4().get(0).getStartHour();
+            int tVDRStartMinuteTime = DBConnection.getInstance().getStartTime4().get(0).getStartMinute();
+
+            int tVDREndHourTime = DBConnection.getInstance().getStartTime4().get(0).getEndHour();
+            int tVDREndMinuteTime = DBConnection.getInstance().getStartTime4().get(0).getEndMinute();
+
+
+            if (ssp3 == tVDRStartHourTime & ssp4 == tVDRStartMinuteTime) {
+
+                System.out.println("tVDR Start Time :" + tVDRStartHourTime);
+                System.out.println("tVDRMinute Time :" + tVDRStartMinuteTime);
+
+                String startTime4 = "ON";
+
+                displaySwitchController.setStartTime4(startTime4);
+
+            }
+
+            if (ssp3 == tVDREndHourTime & ssp4 == tVDREndMinuteTime) {
+
+                System.out.println("tVDR Start Time :" + tVDREndHourTime);
+                System.out.println("tVDR Minute Time :" + tVDREndMinuteTime);
+
+                String endTime4 = "OFF";
+
+                displaySwitchController.setEndTime4(endTime4);
+
+            }
+
+
+
+        }
     }
 }
 

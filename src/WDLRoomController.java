@@ -9,20 +9,21 @@ class WDLRoomController extends JFrame {
     private JList list = null;
     DefaultListModel lm = null;
 
-
+    public ArrayList<AddTime> addTimeList3;
     WDLRoomController() {
+        addTimeList3 = DisplaySwitch.addControllerTimeList3 ;
         setSize(650, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Window Living Room");
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
         setVisible(true);
-        ;
+
 
         JPanel controller3ListPenal = new JPanel();
         controller3ListPenal.setLayout(new GridLayout());
 
-        ArrayList<AddTime> addTimeList = new ArrayList();
+        addTimeList3 = TimeController.getTime3();
 
         JPanel controller3TimePenal = new JPanel();
 
@@ -97,13 +98,15 @@ class WDLRoomController extends JFrame {
                 int esp1 = (int) controller3EndHourSpinner.getValue();
                 int esp2 = (int) controller3EndMinuteSpinner.getValue();
 
-                AddTime addTime = new AddTime(ssp1, ssp2, esp1, esp2);
+                AddTime addTime3 = new AddTime(ssp1, ssp2, esp1, esp2);
 
-                if (addTimeList.isEmpty()) {
+                TimeController.addTime3(addTime3);
+
+                if (addTimeList3.isEmpty()) {
                     lm.clear();
                 }
 
-                addTimeList.add(addTime);
+//                addTimeList.add(addTime);
 
                 String row = "Start at: " + ssp1 + "." + ssp2 + " " + "Ends at:" + esp1 + "." + esp2;
 
@@ -116,12 +119,12 @@ class WDLRoomController extends JFrame {
 
         lm = new DefaultListModel();
 
-        if (addTimeList.isEmpty()) {
+        if (addTimeList3.isEmpty()) {
             a = b = c = d = " - ";
             String row = "Start at: " + a + "." + b + " " + "Ends at:" + c + "." + d;
             lm.addElement(row);
         } else {
-            for (AddTime i : addTimeList) {
+            for (AddTime i : addTimeList3) {
                 a = String.valueOf(i.getStartHour());
                 b = String.valueOf(i.getStartMinute());
                 c = String.valueOf(i.getEndHour());

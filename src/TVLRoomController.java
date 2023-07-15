@@ -8,16 +8,10 @@ public class TVLRoomController extends JFrame {
     private JList list = null;
     private DefaultListModel lm = null;
 
-
-
     public ArrayList<AddTime> addTimeList;
 
-
-
-
-
     TVLRoomController() {
-        addTimeList = DisplaySwitch.addMainTimeList;
+        addTimeList = DisplaySwitch.addControllerTimeList ;
         setSize(650, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("TV Living Room");

@@ -9,7 +9,10 @@ class SPLRoomController extends JFrame {
     private JList list = null;
     DefaultListModel lm = null;
 
+    public ArrayList<AddTime> addTimeList2;
+
     SPLRoomController () {
+        addTimeList2 = DisplaySwitch.addControllerTimeList2 ;
         setSize(650, 300);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Speaker Living Room");
@@ -20,7 +23,7 @@ class SPLRoomController extends JFrame {
         JPanel controller2ListPenal = new JPanel();
         controller2ListPenal .setLayout(new GridLayout());
 
-        ArrayList<AddTime> addTimeList = new ArrayList();
+        addTimeList2 = TimeController.getTime2();
 
         JPanel controller2TimePenal = new JPanel();
 
@@ -95,13 +98,15 @@ class SPLRoomController extends JFrame {
                 int esp1= (int) controller2EndHourSpinner .getValue();
                 int esp2= (int) controller2EndMinuteSpinner .getValue();
 
-                AddTime addTime= new AddTime(ssp1,ssp2,esp1,esp2);
+                AddTime addTime2= new AddTime(ssp1,ssp2,esp1,esp2);
 
-                if(addTimeList.isEmpty()){
+                TimeController.addTime2(addTime2);
+
+                if(addTimeList2.isEmpty()){
                     lm.clear();
                 }
 
-                addTimeList.add(addTime);
+//                addTimeList2.add(addTime2);
 
                 String row ="Start at: "+ssp1+"."+ssp2+" "+"Ends at:"+esp1+"."+esp2;
 
@@ -114,12 +119,12 @@ class SPLRoomController extends JFrame {
 
         lm = new DefaultListModel();
 
-        if(addTimeList.isEmpty()){
+        if(addTimeList2.isEmpty()){
             a = b = c = d = " - ";
             String row ="Start at: "+a+"."+b+" "+"Ends at:"+c+"."+d;
             lm.addElement(row);
         }else{
-            for (AddTime i: addTimeList){
+            for (AddTime i: addTimeList2){
                 a = String.valueOf(i.getStartHour());
                 b = String.valueOf(i.getStartMinute());
                 c = String.valueOf(i.getEndHour());

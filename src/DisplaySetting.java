@@ -36,7 +36,7 @@ class DisplaySetting extends JFrame {
                             case 0: new TVLRoomController();break;
                             case 1: new SPLRoomController();break;
                             case 2: new WDLRoomController();break;
-                            case 3: new AddTime.TVDRoomController();break;
+                            case 3: new TVDRoomController();break;
 
                         }
                     }

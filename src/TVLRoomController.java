@@ -118,11 +118,6 @@ public class TVLRoomController extends JFrame {
 
         lm = new DefaultListModel();
 
-//        if (addTimeList.isEmpty()) {
-//            a = b = c = d = " - ";
-//            String row = "Start at: " + a + "." + b + " " + "Ends at:" + c + "." + d;
-//            lm.addElement(row);
-//        } else {
             for (AddTime i : addTimeList) {
                 a = String.valueOf(i.getStartHour());
                 b = String.valueOf(i.getStartMinute());
@@ -133,12 +128,11 @@ public class TVLRoomController extends JFrame {
                 lm.addElement(row);
 
             }
-//        }
 
         list = new JList(lm);
+
+        //---------------------------------------------------------------------------------------//
         list.addMouseListener(new MouseListener() {
-
-
             @Override
             public void mouseClicked(MouseEvent e) {
 
@@ -146,19 +140,14 @@ public class TVLRoomController extends JFrame {
 
                 controller1SetBtn.setText("Edit");
 
-
                 int selectedIndex = list.getSelectedIndex();
                 System.out.println(selectedIndex);
-
-
 
                 int t1 = DBConnection.getInstance().getStartTime().get(selectedIndex).getStartHour();
                 int t2 = DBConnection.getInstance().getStartTime().get(selectedIndex).getStartMinute();
 
                 int t3 = DBConnection.getInstance().getStartTime().get(selectedIndex).getEndHour();
                 int t4 = DBConnection.getInstance().getStartTime().get(selectedIndex).getEndMinute();
-
-
 
                 controller1StartHourSpinner.setValue(t1);
                 controller1StartMinuteSpinner.setValue(t2);
@@ -169,39 +158,24 @@ public class TVLRoomController extends JFrame {
                 System.out.println(t2);
                 System.out.println(t3);
                 System.out.println(t4);
-
-
-
-
             }
-
-
-
 
             @Override
             public void mousePressed(MouseEvent e) {
-
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-
             }
         });
-
-
-
-
 
         controller1TimePenal.add(controller1StartHourLbl);
         controller1TimePenal.add(controller1StartHourSpinner);

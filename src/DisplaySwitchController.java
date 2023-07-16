@@ -57,18 +57,18 @@ class DisplaySwitchController {
     }
 
     public void setStartTime3(String startTime3) {
-        displaySPLRoom.update(startTime3);
+        displayWDLRoom.update(startTime3);
     }
 
     public void setEndTime3(String endTime3) {
-        displaySPLRoom.update(endTime3);
+        displayWDLRoom.update(endTime3);
     }
 
     public void setStartTime4(String startTime4) {
-        displaySPLRoom.update(startTime4);
+        displayTVDRoom.update(startTime4);
     }
 
     public void setEndTime4(String endTime4) {
-        displaySPLRoom.update(endTime4);
+        displayTVDRoom.update(endTime4);
     }
 }

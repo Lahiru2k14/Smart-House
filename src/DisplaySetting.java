@@ -19,9 +19,7 @@ class DisplaySetting extends JFrame {
         String Rooms[] = {"TV Living Room", "Speaker Living Room", "Window Living Room",
                 "TV Dining Room"};
 
-
         JList list = new JList(Rooms);
-
 
 
         list.addMouseListener(new MouseAdapter() {
@@ -29,7 +27,7 @@ class DisplaySetting extends JFrame {
             public void mouseClicked(MouseEvent evt) {
                 if (evt.getClickCount() == 1) {
 
-                    String data = "";
+//                    String data = "";
                     if (list.getSelectedIndex() != -1) {
 
                         switch (list.getSelectedIndex()) {

@@ -214,6 +214,8 @@ class DisplaySwitch extends JFrame {
 
         for (int i = 0; i < DBConnection.getInstance().addMainTimeList3.size(); i++) {
 
+
+
             int wDLRStartHourTime = DBConnection.getInstance().getStartTime3().get(i).getStartHour();
             int wDLRStartMinuteTime = DBConnection.getInstance().getStartTime3().get(i).getStartMinute();
 

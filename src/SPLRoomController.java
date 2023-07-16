@@ -2,15 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 class SPLRoomController extends JFrame {
-
     private JList list = null;
     DefaultListModel lm = null;
-
     public ArrayList<AddTime> addTimeList2;
-
     SPLRoomController () {
         addTimeList2 = DisplaySwitch.addControllerTimeList2 ;
         setSize(650, 300);
@@ -106,8 +105,6 @@ class SPLRoomController extends JFrame {
                     lm.clear();
                 }
 
-//                addTimeList2.add(addTime2);
-
                 String row ="Start at: "+ssp1+"."+ssp2+" "+"Ends at:"+esp1+"."+esp2;
 
                 lm.addElement(row);
@@ -119,11 +116,6 @@ class SPLRoomController extends JFrame {
 
         lm = new DefaultListModel();
 
-        if(addTimeList2.isEmpty()){
-            a = b = c = d = " - ";
-            String row ="Start at: "+a+"."+b+" "+"Ends at:"+c+"."+d;
-            lm.addElement(row);
-        }else{
             for (AddTime i: addTimeList2){
                 a = String.valueOf(i.getStartHour());
                 b = String.valueOf(i.getStartMinute());
@@ -133,12 +125,55 @@ class SPLRoomController extends JFrame {
                 String row ="Start at: "+a+"."+b+" "+"Ends at:"+c+"."+d;
                 lm.addElement(row);
 
-            }
         }
 
         list = new JList(lm);
 
+        //---------------------------------------------------------------------------------------//
+        list.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
 
+                System.out.println("Clicked");
+
+                controller2SetBtn.setText("Edit");
+
+                int selectedIndex = list.getSelectedIndex();
+                System.out.println(selectedIndex);
+
+                int t1 = DBConnection.getInstance().getStartTime2().get(selectedIndex).getStartHour();
+                int t2 = DBConnection.getInstance().getStartTime2().get(selectedIndex).getStartMinute();
+
+                int t3 = DBConnection.getInstance().getStartTime2().get(selectedIndex).getEndHour();
+                int t4 = DBConnection.getInstance().getStartTime2().get(selectedIndex).getEndMinute();
+
+                controller2StartHourSpinner.setValue(t1);
+                controller2StartMinuteSpinner.setValue(t2);
+                controller2EndHourSpinner.setValue(t3);
+                controller2EndMinuteSpinner.setValue(t4);
+
+                System.out.println(t1);
+                System.out.println(t2);
+                System.out.println(t3);
+                System.out.println(t4);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
 
         controller2TimePenal.add(controller2StartHourLbl);
         controller2TimePenal.add(controller2StartHourSpinner);

@@ -2,12 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class TVLRoomController extends JFrame {
     private JList list = null;
     private DefaultListModel lm = null;
-
     public ArrayList<AddTime> addTimeList;
 
     TVLRoomController() {
@@ -87,7 +88,8 @@ public class TVLRoomController extends JFrame {
 
         //---------------------------------------------------------------------------------------//
 
-        JButton controller1SetBtn = new JButton("Set");
+        JToggleButton controller1SetBtn = new JToggleButton("Set");
+
         controller1SetBtn.setFont(new Font("", 1, 15));
         controller1SetBtn.addActionListener(new ActionListener() {
             @Override
@@ -104,7 +106,6 @@ public class TVLRoomController extends JFrame {
                 if (addTimeList.isEmpty()) {
                     lm.clear();
                 }
-//                addTimeList.add(addTime);
 
                 String row = "Start at: " + ssp1 + "." + ssp2 + " " + "Ends at:" + esp1 + "." + esp2;
 
@@ -117,11 +118,11 @@ public class TVLRoomController extends JFrame {
 
         lm = new DefaultListModel();
 
-        if (addTimeList.isEmpty()) {
-            a = b = c = d = " - ";
-            String row = "Start at: " + a + "." + b + " " + "Ends at:" + c + "." + d;
-            lm.addElement(row);
-        } else {
+//        if (addTimeList.isEmpty()) {
+//            a = b = c = d = " - ";
+//            String row = "Start at: " + a + "." + b + " " + "Ends at:" + c + "." + d;
+//            lm.addElement(row);
+//        } else {
             for (AddTime i : addTimeList) {
                 a = String.valueOf(i.getStartHour());
                 b = String.valueOf(i.getStartMinute());
@@ -132,9 +133,71 @@ public class TVLRoomController extends JFrame {
                 lm.addElement(row);
 
             }
-        }
+//        }
 
         list = new JList(lm);
+        list.addMouseListener(new MouseListener() {
+
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                System.out.println("Clicked");
+
+                controller1SetBtn.setText("Edit");
+
+
+                int selectedIndex = list.getSelectedIndex();
+                System.out.println(selectedIndex);
+
+
+
+                int t1 = DBConnection.getInstance().getStartTime().get(selectedIndex).getStartHour();
+                int t2 = DBConnection.getInstance().getStartTime().get(selectedIndex).getStartMinute();
+
+                int t3 = DBConnection.getInstance().getStartTime().get(selectedIndex).getEndHour();
+                int t4 = DBConnection.getInstance().getStartTime().get(selectedIndex).getEndMinute();
+
+
+
+                controller1StartHourSpinner.setValue(t1);
+                controller1StartMinuteSpinner.setValue(t2);
+                controller1EndHourSpinner.setValue(t3);
+                controller1EndMinuteSpinner.setValue(t4);
+
+                System.out.println(t1);
+                System.out.println(t2);
+                System.out.println(t3);
+                System.out.println(t4);
+
+
+
+
+            }
+
+
+
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
 
 

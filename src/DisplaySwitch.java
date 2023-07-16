@@ -149,11 +149,11 @@ class DisplaySwitch extends JFrame {
 
         for (int i = 0; i < DBConnection.getInstance().addMainTimeList.size(); i++) {
 
-            int tVLRStartHourTime = DBConnection.getInstance().getStartTime().get(0).getStartHour();
-            int tVLRStartMinuteTime = DBConnection.getInstance().getStartTime().get(0).getStartMinute();
+            int tVLRStartHourTime = DBConnection.getInstance().getStartTime().get(i).getStartHour();
+            int tVLRStartMinuteTime = DBConnection.getInstance().getStartTime().get(i).getStartMinute();
 
-            int tVLREndHourTime = DBConnection.getInstance().getStartTime().get(0).getEndHour();
-            int tVLREndMinuteTime = DBConnection.getInstance().getStartTime().get(0).getEndMinute();
+            int tVLREndHourTime = DBConnection.getInstance().getStartTime().get(i).getEndHour();
+            int tVLREndMinuteTime = DBConnection.getInstance().getStartTime().get(i).getEndMinute();
 
             if (ssp3 == tVLRStartHourTime & ssp4 == tVLRStartMinuteTime) {
 
@@ -181,11 +181,11 @@ class DisplaySwitch extends JFrame {
 
         for (int i = 0; i < DBConnection.getInstance().addMainTimeList2.size(); i++) {
 
-            int sPLRStartHourTime = DBConnection.getInstance().getStartTime2().get(0).getStartHour();
-            int sPLRStartMinuteTime = DBConnection.getInstance().getStartTime2().get(0).getStartMinute();
+            int sPLRStartHourTime = DBConnection.getInstance().getStartTime2().get(i).getStartHour();
+            int sPLRStartMinuteTime = DBConnection.getInstance().getStartTime2().get(i).getStartMinute();
 
-            int sPLREndHourTime = DBConnection.getInstance().getStartTime2().get(0).getEndHour();
-            int sPLREndMinuteTime = DBConnection.getInstance().getStartTime2().get(0).getEndMinute();
+            int sPLREndHourTime = DBConnection.getInstance().getStartTime2().get(i).getEndHour();
+            int sPLREndMinuteTime = DBConnection.getInstance().getStartTime2().get(i).getEndMinute();
 
 
             if (ssp3 == sPLRStartHourTime & ssp4 == sPLRStartMinuteTime) {
@@ -214,11 +214,11 @@ class DisplaySwitch extends JFrame {
 
         for (int i = 0; i < DBConnection.getInstance().addMainTimeList3.size(); i++) {
 
-            int wDLRStartHourTime = DBConnection.getInstance().getStartTime3().get(0).getStartHour();
-            int wDLRStartMinuteTime = DBConnection.getInstance().getStartTime3().get(0).getStartMinute();
+            int wDLRStartHourTime = DBConnection.getInstance().getStartTime3().get(i).getStartHour();
+            int wDLRStartMinuteTime = DBConnection.getInstance().getStartTime3().get(i).getStartMinute();
 
-            int wDLREndHourTime = DBConnection.getInstance().getStartTime3().get(0).getEndHour();
-            int wDLREndMinuteTime = DBConnection.getInstance().getStartTime3().get(0).getEndMinute();
+            int wDLREndHourTime = DBConnection.getInstance().getStartTime3().get(i).getEndHour();
+            int wDLREndMinuteTime = DBConnection.getInstance().getStartTime3().get(i).getEndMinute();
 
 
             if (ssp3 == wDLRStartHourTime & ssp4 == wDLRStartMinuteTime) {
@@ -249,11 +249,11 @@ class DisplaySwitch extends JFrame {
 
         for (int i = 0; i < DBConnection.getInstance().addMainTimeList4.size(); i++) {
 
-            int tVDRStartHourTime = DBConnection.getInstance().getStartTime4().get(0).getStartHour();
-            int tVDRStartMinuteTime = DBConnection.getInstance().getStartTime4().get(0).getStartMinute();
+            int tVDRStartHourTime = DBConnection.getInstance().getStartTime4().get(i).getStartHour();
+            int tVDRStartMinuteTime = DBConnection.getInstance().getStartTime4().get(i).getStartMinute();
 
-            int tVDREndHourTime = DBConnection.getInstance().getStartTime4().get(0).getEndHour();
-            int tVDREndMinuteTime = DBConnection.getInstance().getStartTime4().get(0).getEndMinute();
+            int tVDREndHourTime = DBConnection.getInstance().getStartTime4().get(i).getEndHour();
+            int tVDREndMinuteTime = DBConnection.getInstance().getStartTime4().get(i).getEndMinute();
 
 
             if (ssp3 == tVDRStartHourTime & ssp4 == tVDRStartMinuteTime) {

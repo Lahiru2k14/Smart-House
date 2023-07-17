@@ -153,32 +153,35 @@ public class TVLRoomController extends JFrame {
 
         //---------------------------------------------------------------------------------------//
         list.addMouseListener(new MouseListener() {
+
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                System.out.println("Clicked");
 
-                controller1SetBtn.setText("Edit");
+                    System.out.println("Clicked");
 
-                selectedIndex = list.getSelectedIndex();
+                    controller1SetBtn.setText("Edit");
 
-                System.out.println(selectedIndex);
+                    selectedIndex = list.getSelectedIndex();
 
-                int t1 = DBConnection.getInstance().getStartTime().get(selectedIndex).getStartHour();
-                int t2 = DBConnection.getInstance().getStartTime().get(selectedIndex).getStartMinute();
+                    System.out.println(selectedIndex);
 
-                int t3 = DBConnection.getInstance().getStartTime().get(selectedIndex).getEndHour();
-                int t4 = DBConnection.getInstance().getStartTime().get(selectedIndex).getEndMinute();
+                    int t1 = DBConnection.getInstance().getStartTime().get(selectedIndex).getStartHour();
+                    int t2 = DBConnection.getInstance().getStartTime().get(selectedIndex).getStartMinute();
 
-                controller1StartHourSpinner.setValue(t1);
-                controller1StartMinuteSpinner.setValue(t2);
-                controller1EndHourSpinner.setValue(t3);
-                controller1EndMinuteSpinner.setValue(t4);
+                    int t3 = DBConnection.getInstance().getStartTime().get(selectedIndex).getEndHour();
+                    int t4 = DBConnection.getInstance().getStartTime().get(selectedIndex).getEndMinute();
 
-                System.out.println(t1);
-                System.out.println(t2);
-                System.out.println(t3);
-                System.out.println(t4);
+                    controller1StartHourSpinner.setValue(t1);
+                    controller1StartMinuteSpinner.setValue(t2);
+                    controller1EndHourSpinner.setValue(t3);
+                    controller1EndMinuteSpinner.setValue(t4);
+
+                    System.out.println(t1);
+                    System.out.println(t2);
+                    System.out.println(t3);
+                    System.out.println(t4);
+
             }
 
             @Override

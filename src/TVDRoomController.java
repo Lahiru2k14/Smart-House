@@ -5,12 +5,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TVDRoomController extends JFrame {
 
     private JList list = null;
     DefaultListModel lm = null;
     public ArrayList<AddTime> addTimeList4;
+    int selectedIndex4=-1;
     TVDRoomController () {
         addTimeList4 = DisplaySwitch.addControllerTimeList4 ;
         setSize(650, 300);
@@ -99,17 +101,35 @@ public class TVDRoomController extends JFrame {
 
                 AddTime addTime4= new AddTime(ssp1,ssp2,esp1,esp2);
 
-                TimeController.addTime4(addTime4);
+                String f1 = String.format("%02d", ssp1);
+                String f2 = String.format("%02d", ssp2);
+                String f3 = String.format("%02d", esp1);
+                String f4 = String.format("%02d", esp2);
 
-                if(addTimeList4.isEmpty()){
-                    lm.clear();
+                String row = "Start at : " + f1 + "." + f2 + " " + "Ends at :" + f3 + "." + f4;
+
+                if (Objects.equals(controller4SetBtn.getText(), "Set")) {
+
+                    TimeController.addTime4(addTime4);
+
+                    if (addTimeList4.isEmpty()) {
+                        lm.clear();
+                    }
+
+                    lm.addElement(row);
+
+                } else {
+
+
+                    addTimeList4.set(selectedIndex4, addTime4);
+
+                    lm.set(selectedIndex4,row);
+
+                    controller4SetBtn.setText("Set");
+
                 }
-
-                String row ="Start at: "+ssp1+"."+ssp2+" "+"Ends at:"+esp1+"."+esp2;
-
-                lm.addElement(row);
-
             }
+
         });
 
         String a,b,c,d;
@@ -138,14 +158,14 @@ public class TVDRoomController extends JFrame {
 
                 controller4SetBtn.setText("Edit");
 
-                int selectedIndex = list.getSelectedIndex();
-                System.out.println(selectedIndex);
+                selectedIndex4 = list.getSelectedIndex();
+                System.out.println(selectedIndex4);
 
-                int t1 = DBConnection.getInstance().getStartTime4().get(selectedIndex).getStartHour();
-                int t2 = DBConnection.getInstance().getStartTime4().get(selectedIndex).getStartMinute();
+                int t1 = DBConnection.getInstance().getStartTime4().get(selectedIndex4).getStartHour();
+                int t2 = DBConnection.getInstance().getStartTime4().get(selectedIndex4).getStartMinute();
 
-                int t3 = DBConnection.getInstance().getStartTime4().get(selectedIndex).getEndHour();
-                int t4 = DBConnection.getInstance().getStartTime4().get(selectedIndex).getEndMinute();
+                int t3 = DBConnection.getInstance().getStartTime4().get(selectedIndex4).getEndHour();
+                int t4 = DBConnection.getInstance().getStartTime4().get(selectedIndex4).getEndMinute();
 
                 controller4StartHourSpinner.setValue(t1);
                 controller4StartMinuteSpinner.setValue(t2);

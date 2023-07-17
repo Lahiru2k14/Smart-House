@@ -5,11 +5,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 class WDLRoomController extends JFrame {
     private JList list = null;
     DefaultListModel lm = null;
     public ArrayList<AddTime> addTimeList3;
+    int selectedIndex3=-1;
     WDLRoomController() {
         addTimeList3 = DisplaySwitch.addControllerTimeList3 ;
         setSize(650, 300);
@@ -99,17 +101,35 @@ class WDLRoomController extends JFrame {
 
                 AddTime addTime3 = new AddTime(ssp1, ssp2, esp1, esp2);
 
-                TimeController.addTime3(addTime3);
+                String f1 = String.format("%02d", ssp1);
+                String f2 = String.format("%02d", ssp2);
+                String f3 = String.format("%02d", esp1);
+                String f4 = String.format("%02d", esp2);
 
-                if (addTimeList3.isEmpty()) {
-                    lm.clear();
+                String row = "Start at : " + f1 + "." + f2 + " " + "Ends at :" + f3 + "." + f4;
+
+                if (Objects.equals(controller3SetBtn.getText(), "Set")) {
+
+                    TimeController.addTime3(addTime3);
+
+                    if (addTimeList3.isEmpty()) {
+                        lm.clear();
+                    }
+
+                    lm.addElement(row);
+
+                } else {
+
+
+                    addTimeList3.set(selectedIndex3, addTime3);
+
+                    lm.set(selectedIndex3,row);
+
+                    controller3SetBtn.setText("Set");
+
                 }
-
-                String row = "Start at: " + ssp1 + "." + ssp2 + " " + "Ends at:" + esp1 + "." + esp2;
-
-                lm.addElement(row);
-
             }
+
         });
 
         String a, b, c, d;
@@ -138,14 +158,14 @@ class WDLRoomController extends JFrame {
 
                 controller3SetBtn.setText("Edit");
 
-                int selectedIndex = list.getSelectedIndex();
-                System.out.println(selectedIndex);
+                selectedIndex3 = list.getSelectedIndex();
+                System.out.println(selectedIndex3);
 
-                int t1 = DBConnection.getInstance().getStartTime3().get(selectedIndex).getStartHour();
-                int t2 = DBConnection.getInstance().getStartTime3().get(selectedIndex).getStartMinute();
+                int t1 = DBConnection.getInstance().getStartTime3().get(selectedIndex3).getStartHour();
+                int t2 = DBConnection.getInstance().getStartTime3().get(selectedIndex3).getStartMinute();
 
-                int t3 = DBConnection.getInstance().getStartTime3().get(selectedIndex).getEndHour();
-                int t4 = DBConnection.getInstance().getStartTime3().get(selectedIndex).getEndMinute();
+                int t3 = DBConnection.getInstance().getStartTime3().get(selectedIndex3).getEndHour();
+                int t4 = DBConnection.getInstance().getStartTime3().get(selectedIndex3).getEndMinute();
 
                 controller3StartHourSpinner.setValue(t1);
                 controller3StartMinuteSpinner.setValue(t2);

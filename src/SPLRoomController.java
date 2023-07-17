@@ -110,7 +110,7 @@ class SPLRoomController extends JFrame {
 
                 if (Objects.equals(controller2SetBtn.getText(), "Set")) {
 
-                    TimeController.addTime(addTime2);
+                    TimeController.addTime2(addTime2);
 
                     if (addTimeList2.isEmpty()) {
                         lm.clear();
@@ -158,6 +158,7 @@ class SPLRoomController extends JFrame {
                 controller2SetBtn.setText("Edit");
 
                 selectedIndex2 = list.getSelectedIndex();
+
                 System.out.println(selectedIndex2);
 
                 int t1 = DBConnection.getInstance().getStartTime2().get(selectedIndex2).getStartHour();

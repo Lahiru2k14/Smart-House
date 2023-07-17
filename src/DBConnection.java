@@ -24,33 +24,33 @@ public class DBConnection {
         return dbConnection;
     }
 
-    public ArrayList<AddTime> getAddTime() {
-        return addMainTimeList;
-    }
+//    public ArrayList<AddTime> getAddTime() {
+//        return addMainTimeList;
+//    }
 
     public ArrayList<AddTime> getStartTime() {
         return addMainTimeList;
     }
-
-    public ArrayList<AddTime> getAddTime2() {
-        return addMainTimeList2;
-    }
+//
+//    public ArrayList<AddTime> getAddTime2() {
+//        return addMainTimeList2;
+//    }
 
     public ArrayList<AddTime> getStartTime2() {
         return addMainTimeList2;
     }
 
-    public ArrayList<AddTime> getAddTime3() {
-        return addMainTimeList3;
-    }
+//    public ArrayList<AddTime> getAddTime3() {
+//        return addMainTimeList3;
+//    }
 
     public ArrayList<AddTime> getStartTime3() {
         return addMainTimeList3;
     }
 
-    public ArrayList<AddTime> getAddTime4() {
-        return addMainTimeList4;
-    }
+//    public ArrayList<AddTime> getAddTime4() {
+//        return addMainTimeList4;
+//    }
 
     public ArrayList<AddTime> getStartTime4() {
         return addMainTimeList4;

@@ -11,7 +11,6 @@ public class TVLRoomController extends JFrame {
     private JList list = null;
     private DefaultListModel lm = null;
     public ArrayList<AddTime> addTimeList;
-
     int selectedIndex=-1;
 
     TVLRoomController() {
@@ -97,15 +96,21 @@ public class TVLRoomController extends JFrame {
         controller1SetBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int ssp1 = (int) controller1StartHourSpinner.getValue();
+                int ssp2 = (int) controller1StartMinuteSpinner.getValue();
+                int esp1 = (int) controller1EndHourSpinner.getValue();
+                int esp2 = (int) controller1EndMinuteSpinner.getValue();
 
-                if (Objects.equals(controller1SetBtn.getText(), "Set")){
+                AddTime addTime = new AddTime(ssp1, ssp2, esp1, esp2);
 
-                    int ssp1 = (int) controller1StartHourSpinner.getValue();
-                    int ssp2 = (int) controller1StartMinuteSpinner.getValue();
-                    int esp1 = (int) controller1EndHourSpinner.getValue();
-                    int esp2 = (int) controller1EndMinuteSpinner.getValue();
+                String f1 = String.format("%02d", ssp1);
+                String f2 = String.format("%02d", ssp2);
+                String f3 = String.format("%02d", esp1);
+                String f4 = String.format("%02d", esp2);
 
-                    AddTime addTime = new AddTime(ssp1, ssp2, esp1, esp2);
+                String row = "Start at : " + f1 + "." + f2 + " " + "Ends at :" + f3 + "." + f4;
+
+                if (Objects.equals(controller1SetBtn.getText(), "Set")) {
 
                     TimeController.addTime(addTime);
 
@@ -113,24 +118,17 @@ public class TVLRoomController extends JFrame {
                         lm.clear();
                     }
 
-                    String row = "Start at: " + ssp1 + "." + ssp2 + " " + "Ends at:" + esp1 + "." + esp2;
-
                     lm.addElement(row);
 
+                } else {
+
+                    addTimeList.set(selectedIndex, addTime);
+
+                    lm.set(selectedIndex,row);
+
+                    controller1SetBtn.setText("Set");
+
                 }
-
-                int ta = DBConnection.getInstance().getStartTime().get(selectedIndex).getStartHour();
-                int tb = DBConnection.getInstance().getStartTime().get(selectedIndex).getStartMinute();
-
-                int tc = DBConnection.getInstance().getStartTime().get(selectedIndex).getEndHour();
-                int td = DBConnection.getInstance().getStartTime().get(selectedIndex).getEndMinute();
-
-                addTimeList.set(0, ta);
-
-
-
-
-
             }
 
         });
@@ -152,8 +150,6 @@ public class TVLRoomController extends JFrame {
             }
 
         list = new JList(lm);
-
-
 
         //---------------------------------------------------------------------------------------//
         list.addMouseListener(new MouseListener() {

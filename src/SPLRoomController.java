@@ -5,11 +5,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 class SPLRoomController extends JFrame {
     private JList list = null;
     DefaultListModel lm = null;
     public ArrayList<AddTime> addTimeList2;
+    int selectedIndex2=-1;
     SPLRoomController () {
         addTimeList2 = DisplaySwitch.addControllerTimeList2 ;
         setSize(650, 300);
@@ -99,17 +101,34 @@ class SPLRoomController extends JFrame {
 
                 AddTime addTime2= new AddTime(ssp1,ssp2,esp1,esp2);
 
-                TimeController.addTime2(addTime2);
+                String f1 = String.format("%02d", ssp1);
+                String f2 = String.format("%02d", ssp2);
+                String f3 = String.format("%02d", esp1);
+                String f4 = String.format("%02d", esp2);
 
-                if(addTimeList2.isEmpty()){
-                    lm.clear();
+                String row = "Start at: " + f1 + "." + f2 + " " + "Ends at:" + f3 + "." + f4;
+
+                if (Objects.equals(controller2SetBtn.getText(), "Set")) {
+
+                    TimeController.addTime(addTime2);
+
+                    if (addTimeList2.isEmpty()) {
+                        lm.clear();
+                    }
+
+                    lm.addElement(row);
+
+                } else {
+
+                    addTimeList2.set(selectedIndex2, addTime2);
+
+                    lm.set(selectedIndex2,row);
+
+                    controller2SetBtn.setText("Set");
+
                 }
-
-                String row ="Start at: "+ssp1+"."+ssp2+" "+"Ends at:"+esp1+"."+esp2;
-
-                lm.addElement(row);
-
             }
+
         });
 
         String a,b,c,d;
@@ -122,7 +141,7 @@ class SPLRoomController extends JFrame {
                 c = String.valueOf(i.getEndHour());
                 d = String.valueOf(i.getEndMinute());
 
-                String row ="Start at: "+a+"."+b+" "+"Ends at:"+c+"."+d;
+                String row ="Start at : "+a+"."+b+" "+"Ends at :"+c+"."+d;
                 lm.addElement(row);
 
         }
@@ -138,14 +157,14 @@ class SPLRoomController extends JFrame {
 
                 controller2SetBtn.setText("Edit");
 
-                int selectedIndex = list.getSelectedIndex();
-                System.out.println(selectedIndex);
+                selectedIndex2 = list.getSelectedIndex();
+                System.out.println(selectedIndex2);
 
-                int t1 = DBConnection.getInstance().getStartTime2().get(selectedIndex).getStartHour();
-                int t2 = DBConnection.getInstance().getStartTime2().get(selectedIndex).getStartMinute();
+                int t1 = DBConnection.getInstance().getStartTime2().get(selectedIndex2).getStartHour();
+                int t2 = DBConnection.getInstance().getStartTime2().get(selectedIndex2).getStartMinute();
 
-                int t3 = DBConnection.getInstance().getStartTime2().get(selectedIndex).getEndHour();
-                int t4 = DBConnection.getInstance().getStartTime2().get(selectedIndex).getEndMinute();
+                int t3 = DBConnection.getInstance().getStartTime2().get(selectedIndex2).getEndHour();
+                int t4 = DBConnection.getInstance().getStartTime2().get(selectedIndex2).getEndMinute();
 
                 controller2StartHourSpinner.setValue(t1);
                 controller2StartMinuteSpinner.setValue(t2);

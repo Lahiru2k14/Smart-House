@@ -1,9 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 class AddTime {
     private int startHour;
     private int startMinute;
@@ -25,7 +19,7 @@ class AddTime {
         return startHour;
     }
 
-    public void setStartHour(int startHour) {
+    public void setStartHour() {
         this.startHour = startHour;
     }
 
@@ -33,7 +27,7 @@ class AddTime {
         return startMinute;
     }
 
-    public void setStartMinute(int startMinute) {
+    public void setStartMinute() {
         this.startMinute = startMinute;
     }
 
@@ -41,7 +35,7 @@ class AddTime {
         return endHour;
     }
 
-    public void setEndHour(int endHour) {
+    public void setEndHour() {
         this.endHour = endHour;
     }
 
@@ -49,7 +43,7 @@ class AddTime {
         return endMinute;
     }
 
-    public void setEndMinute(int endMinute) {
+    public void setEndMinute() {
         this.endMinute = endMinute;
     }
 

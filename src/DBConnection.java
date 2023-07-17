@@ -56,6 +56,11 @@ public class DBConnection {
         return addMainTimeList4;
     }
 
+
+    public ArrayList<AddTime>  setStartTime() {
+
+        return addMainTimeList;
+    }
 }
 
 

@@ -5,11 +5,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TVLRoomController extends JFrame {
     private JList list = null;
     private DefaultListModel lm = null;
     public ArrayList<AddTime> addTimeList;
+
+    int selectedIndex=-1;
 
     TVLRoomController() {
         addTimeList = DisplaySwitch.addControllerTimeList ;
@@ -47,11 +50,11 @@ public class TVLRoomController extends JFrame {
         JLabel controller1StartMinuteLbl = new JLabel("Start Minute:");
         controller1StartMinuteLbl.setFont(new Font("", 1, 15));
 
-        SpinnerModel minuteValue = new SpinnerNumberModel(00, //initial value
+        SpinnerModel startMinuteValue = new SpinnerNumberModel(00, //initial value
                 00, //minimum value
                 60, //maximum value
                 1); //step
-        JSpinner controller1StartMinuteSpinner = new JSpinner(minuteValue);
+        JSpinner controller1StartMinuteSpinner = new JSpinner(startMinuteValue);
         controller1StartMinuteSpinner.setBounds(100, 100, 20, 10);
         controller1StartMinuteSpinner.setEditor(
                 new JSpinner.NumberEditor(controller1StartMinuteSpinner, "00"));
@@ -94,35 +97,54 @@ public class TVLRoomController extends JFrame {
         controller1SetBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int ssp1 = (int) controller1StartHourSpinner.getValue();
-                int ssp2 = (int) controller1StartMinuteSpinner.getValue();
-                int esp1 = (int) controller1EndHourSpinner.getValue();
-                int esp2 = (int) controller1EndMinuteSpinner.getValue();
 
-                AddTime addTime = new AddTime(ssp1, ssp2, esp1, esp2);
+                if (Objects.equals(controller1SetBtn.getText(), "Set")){
 
-                TimeController.addTime(addTime);
+                    int ssp1 = (int) controller1StartHourSpinner.getValue();
+                    int ssp2 = (int) controller1StartMinuteSpinner.getValue();
+                    int esp1 = (int) controller1EndHourSpinner.getValue();
+                    int esp2 = (int) controller1EndMinuteSpinner.getValue();
 
-                if (addTimeList.isEmpty()) {
-                    lm.clear();
+                    AddTime addTime = new AddTime(ssp1, ssp2, esp1, esp2);
+
+                    TimeController.addTime(addTime);
+
+                    if (addTimeList.isEmpty()) {
+                        lm.clear();
+                    }
+
+                    String row = "Start at: " + ssp1 + "." + ssp2 + " " + "Ends at:" + esp1 + "." + esp2;
+
+                    lm.addElement(row);
+
                 }
 
-                String row = "Start at: " + ssp1 + "." + ssp2 + " " + "Ends at:" + esp1 + "." + esp2;
+                int ta = DBConnection.getInstance().getStartTime().get(selectedIndex).getStartHour();
+                int tb = DBConnection.getInstance().getStartTime().get(selectedIndex).getStartMinute();
 
-                lm.addElement(row);
+                int tc = DBConnection.getInstance().getStartTime().get(selectedIndex).getEndHour();
+                int td = DBConnection.getInstance().getStartTime().get(selectedIndex).getEndMinute();
+
+                addTimeList.set(0, ta);
+
+
+
+
 
             }
+
         });
 
-        String a, b, c, d;
+        int a, b, c, d;
 
         lm = new DefaultListModel();
 
+
             for (AddTime i : addTimeList) {
-                a = String.valueOf(i.getStartHour());
-                b = String.valueOf(i.getStartMinute());
-                c = String.valueOf(i.getEndHour());
-                d = String.valueOf(i.getEndMinute());
+                a = i.getStartHour();
+                b = i.getStartMinute();
+                c = i.getEndHour();
+                d = i.getEndMinute();
 
                 String row = "Start at: " + a + "." + b + " " + "Ends at:" + c + "." + d;
                 lm.addElement(row);
@@ -130,6 +152,8 @@ public class TVLRoomController extends JFrame {
             }
 
         list = new JList(lm);
+
+
 
         //---------------------------------------------------------------------------------------//
         list.addMouseListener(new MouseListener() {
@@ -140,7 +164,8 @@ public class TVLRoomController extends JFrame {
 
                 controller1SetBtn.setText("Edit");
 
-                int selectedIndex = list.getSelectedIndex();
+                selectedIndex = list.getSelectedIndex();
+
                 System.out.println(selectedIndex);
 
                 int t1 = DBConnection.getInstance().getStartTime().get(selectedIndex).getStartHour();

@@ -33,9 +33,6 @@ class DisplayTVLRoom extends JFrame {
         tvlLabel.setText(switchAction);
     }
 
-
-
-
 }
 
 

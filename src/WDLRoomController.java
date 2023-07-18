@@ -120,7 +120,6 @@ class WDLRoomController extends JFrame {
 
                 } else {
 
-
                     addTimeList3.set(selectedIndex3, addTime3);
 
                     lm.set(selectedIndex3,row);
@@ -162,12 +161,9 @@ class WDLRoomController extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                System.out.println("Clicked");
-
                 controller3SetBtn.setText("Edit");
 
                 selectedIndex3 = list.getSelectedIndex();
-                System.out.println(selectedIndex3);
 
                 int t1 = DBConnection.getInstance().getStartTime3().get(selectedIndex3).getStartHour();
                 int t2 = DBConnection.getInstance().getStartTime3().get(selectedIndex3).getStartMinute();
@@ -180,10 +176,6 @@ class WDLRoomController extends JFrame {
                 controller3EndHourSpinner.setValue(t3);
                 controller3EndMinuteSpinner.setValue(t4);
 
-                System.out.println(t1);
-                System.out.println(t2);
-                System.out.println(t3);
-                System.out.println(t4);
             }
 
             @Override

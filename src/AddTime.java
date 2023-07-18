@@ -4,7 +4,6 @@ class AddTime {
     private int endHour;
     private int endMinute;
 
-
     public AddTime() {
     }
     public AddTime(int startHour, int startMinute, int endHour, int endMinute) {
@@ -13,7 +12,6 @@ class AddTime {
         this.endHour = endHour;
         this.endMinute = endMinute;
     }
-
 
     public int getStartHour() {
         return startHour;

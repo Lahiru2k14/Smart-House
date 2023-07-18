@@ -120,7 +120,6 @@ public class TVDRoomController extends JFrame {
 
                 } else {
 
-
                     addTimeList4.set(selectedIndex4, addTime4);
 
                     lm.set(selectedIndex4,row);
@@ -162,12 +161,9 @@ public class TVDRoomController extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                System.out.println("Clicked");
-
                 controller4SetBtn.setText("Edit");
 
                 selectedIndex4 = list.getSelectedIndex();
-                System.out.println(selectedIndex4);
 
                 int t1 = DBConnection.getInstance().getStartTime4().get(selectedIndex4).getStartHour();
                 int t2 = DBConnection.getInstance().getStartTime4().get(selectedIndex4).getStartMinute();
@@ -180,10 +176,6 @@ public class TVDRoomController extends JFrame {
                 controller4EndHourSpinner.setValue(t3);
                 controller4EndMinuteSpinner.setValue(t4);
 
-                System.out.println(t1);
-                System.out.println(t2);
-                System.out.println(t3);
-                System.out.println(t4);
             }
 
             @Override

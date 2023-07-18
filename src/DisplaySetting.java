@@ -15,8 +15,6 @@ class DisplaySetting extends JFrame {
         JPanel listPenal = new JPanel();
         listPenal.setLayout(new GridLayout());
 
-
-
         String Rooms[] = {"TV Living Room", "Speaker Living Room", "Window Living Room",
                 "TV Dining Room"};
 
@@ -26,13 +24,11 @@ class DisplaySetting extends JFrame {
         list.setFont(new Font("Arial Rounded MT Bold",1,16));
 
 
-
         list.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
                 if (evt.getClickCount() == 1) {
 
-//                    String data = "";
                     if (list.getSelectedIndex() != -1) {
 
                         switch (list.getSelectedIndex()) {
@@ -40,7 +36,6 @@ class DisplaySetting extends JFrame {
                             case 1: new SPLRoomController();break;
                             case 2: new WDLRoomController();break;
                             case 3: new TVDRoomController();break;
-
                         }
                     }
                 }

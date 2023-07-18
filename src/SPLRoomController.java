@@ -161,13 +161,9 @@ class SPLRoomController extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                System.out.println("Clicked");
-
                 controller2SetBtn.setText("Edit");
 
                 selectedIndex2 = list.getSelectedIndex();
-
-                System.out.println(selectedIndex2);
 
                 int t1 = DBConnection.getInstance().getStartTime2().get(selectedIndex2).getStartHour();
                 int t2 = DBConnection.getInstance().getStartTime2().get(selectedIndex2).getStartMinute();
@@ -180,10 +176,6 @@ class SPLRoomController extends JFrame {
                 controller2EndHourSpinner.setValue(t3);
                 controller2EndMinuteSpinner.setValue(t4);
 
-                System.out.println(t1);
-                System.out.println(t2);
-                System.out.println(t3);
-                System.out.println(t4);
             }
 
             @Override

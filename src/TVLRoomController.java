@@ -166,14 +166,9 @@ public class TVLRoomController extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
 
-
-                    System.out.println("Clicked");
-
                     controller1SetBtn.setText("Edit");
 
                     selectedIndex = list.getSelectedIndex();
-
-                    System.out.println(selectedIndex);
 
                     int t1 = DBConnection.getInstance().getStartTime().get(selectedIndex).getStartHour();
                     int t2 = DBConnection.getInstance().getStartTime().get(selectedIndex).getStartMinute();
@@ -186,10 +181,6 @@ public class TVLRoomController extends JFrame {
                     controller1EndHourSpinner.setValue(t3);
                     controller1EndMinuteSpinner.setValue(t4);
 
-                    System.out.println(t1);
-                    System.out.println(t2);
-                    System.out.println(t3);
-                    System.out.println(t4);
 
             }
 

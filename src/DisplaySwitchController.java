@@ -1,5 +1,4 @@
 class DisplaySwitchController {
-
     private String switchAction;
     static DisplayTVLRoom displayTVLRoom;
     private DisplaySPLRoom displaySPLRoom;

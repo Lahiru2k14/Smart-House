@@ -14,7 +14,7 @@ class SPLRoomController extends JFrame {
     int selectedIndex2=-1;
     SPLRoomController () {
         addTimeList2 = DisplaySwitch.addControllerTimeList2 ;
-        setSize(650, 300);
+        setSize(650, 250);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Speaker Living Room");
         setLayout(new BorderLayout());
@@ -101,12 +101,12 @@ class SPLRoomController extends JFrame {
 
                 AddTime addTime2= new AddTime(ssp1,ssp2,esp1,esp2);
 
-                String f1 = String.format("%02d", ssp1);
-                String f2 = String.format("%02d", ssp2);
-                String f3 = String.format("%02d", esp1);
-                String f4 = String.format("%02d", esp2);
+                String x1 = String.format("%02d", ssp1);
+                String x2 = String.format("%02d", ssp2);
+                String x3 = String.format("%02d", esp1);
+                String x4 = String.format("%02d", esp2);
 
-                String row = "Start at: " + f1 + "." + f2 + " " + "Ends at:" + f3 + "." + f4;
+                String row = "Start at : " + x1 + "." + x2 + " " + "Ends at :" + x3 + "." + x4;
 
                 if (Objects.equals(controller2SetBtn.getText(), "Set")) {
 
@@ -141,12 +141,20 @@ class SPLRoomController extends JFrame {
                 c = String.valueOf(i.getEndHour());
                 d = String.valueOf(i.getEndMinute());
 
-                String row ="Start at : "+a+"."+b+" "+"Ends at :"+c+"."+d;
+                String y1 = String.format("%02d", a);
+                String y2 = String.format("%02d", b);
+                String y3 = String.format("%02d", c);
+                String y4 = String.format("%02d", d);
+
+                String row = "Start at : " + y1 + "." + y2 + " " + "Ends at :" + y3 + "." + y4;
+
                 lm.addElement(row);
 
         }
 
         list = new JList(lm);
+        list.setFont(new Font("",1,17));
+        list.setBackground(new Color(136, 191, 143));
 
         //---------------------------------------------------------------------------------------//
         list.addMouseListener(new MouseListener() {

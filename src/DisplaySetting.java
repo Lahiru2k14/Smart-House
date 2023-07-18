@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 class DisplaySetting extends JFrame {
 
     DisplaySetting() {
-        setSize(300, 300);
+        setSize(250, 250);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Controller");
         setLocationRelativeTo(null);
@@ -16,10 +16,15 @@ class DisplaySetting extends JFrame {
         listPenal.setLayout(new GridLayout());
 
 
+
         String Rooms[] = {"TV Living Room", "Speaker Living Room", "Window Living Room",
                 "TV Dining Room"};
 
         JList list = new JList(Rooms);
+
+        list.setBackground(new Color(136, 191, 143));
+        list.setFont(new Font("Arial Rounded MT Bold",1,16));
+
 
 
         list.addMouseListener(new MouseAdapter() {

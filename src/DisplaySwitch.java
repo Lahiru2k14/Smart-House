@@ -25,16 +25,21 @@ class DisplaySwitch extends JFrame {
 
 
     DisplaySwitch(DisplaySwitchController displaySwitchController) {
-        setSize(450, 200);
+        setSize(450, 260);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Switch");
         setLocationRelativeTo(null);
-        setLayout(new GridLayout(3, 1));
+        setLayout(new BorderLayout());
+        getContentPane().setBackground(new Color(102, 210, 227));
 
         this.displaySwitchController = displaySwitchController;
 
         switchBtn = new JToggleButton("ON");
-        switchBtn.setFont(new Font("", 1, 20));
+        switchBtn.setBackground(new Color(136, 191, 143));
+//        switchBtn.setBackground(Color.gray);
+//        switchBtn.setForeground(Color.white);
+
+        switchBtn.setFont(new Font("Arial Rounded MT Bold", 5, 18));
         switchBtn.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -63,6 +68,8 @@ class DisplaySwitch extends JFrame {
         });
 
         settingBtn = new JButton("Settings");
+//        settingBtn.setBackground(Color.gray);
+//        settingBtn.setForeground(Color.white);
         settingBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
 
@@ -70,7 +77,8 @@ class DisplaySwitch extends JFrame {
             }
         });
 
-        settingBtn.setFont(new Font("", 1, 20));
+        settingBtn.setFont(new Font("Arial Rounded MT Bold", 3, 18));
+        settingBtn.setBackground(new Color(136, 191, 143));
 
         //---------------------------------------------------------------------------------//
 
@@ -78,7 +86,7 @@ class DisplaySwitch extends JFrame {
         switchMenuTimePenal.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         JLabel switchMenuHourLbl = new JLabel("Hour:");
-        switchMenuHourLbl.setFont(new Font("", 1, 20));
+        switchMenuHourLbl.setFont(new Font("", 1, 18));
 
         SpinnerModel valueHour =
                 new SpinnerNumberModel(00, //initial value
@@ -89,7 +97,7 @@ class DisplaySwitch extends JFrame {
         switchMenuHourSpinner.setBounds(100, 100, 50, 30);
         switchMenuHourSpinner.setEditor(
                 new JSpinner.NumberEditor(switchMenuHourSpinner, "00"));
-        switchMenuHourSpinner.setFont(new Font("", 1, 20));
+        switchMenuHourSpinner.setFont(new Font("", 1, 18));
 
         switchMenuHourSpinner.addChangeListener(new ChangeListener() {
             @Override
@@ -103,7 +111,7 @@ class DisplaySwitch extends JFrame {
 
 
         JLabel switchMenuMinuteLbl = new JLabel("Minute:");
-        switchMenuMinuteLbl.setFont(new Font("", 1, 20));
+        switchMenuMinuteLbl.setFont(new Font("", 1, 18));
 
         SpinnerModel valueMinute =
                 new SpinnerNumberModel(00, //initial value
@@ -114,7 +122,7 @@ class DisplaySwitch extends JFrame {
         switchMenuMinuteSpinner.setBounds(100, 100, 50, 30);
         switchMenuMinuteSpinner.setEditor(
                 new JSpinner.NumberEditor(switchMenuMinuteSpinner, "00"));
-        switchMenuMinuteSpinner.setFont(new Font("", 1, 20));
+        switchMenuMinuteSpinner.setFont(new Font("", 1, 18));
 
         switchMenuMinuteSpinner.addChangeListener(new ChangeListener() {
             @Override
@@ -131,9 +139,49 @@ class DisplaySwitch extends JFrame {
         switchMenuTimePenal.add(switchMenuMinuteLbl);
         switchMenuTimePenal.add(switchMenuMinuteSpinner);
 
-        add(switchBtn);
-        add(settingBtn);
-        add(switchMenuTimePenal);
+        JPanel centerPenal =new JPanel();
+        centerPenal.setBackground(new Color(136, 191, 143));
+
+
+
+        JLabel northLbl=new JLabel("Super Home Controller");
+        northLbl.setForeground(Color.black);
+
+
+        JLabel northLbl2=new JLabel("");
+
+
+        JPanel northPenal =new JPanel();
+        northPenal.setBackground(new Color(136, 191, 143));
+        northPenal.setForeground(Color.RED);
+//        northPenal.setForeground(Color.gray);
+
+        northPenal.setLayout(new GridLayout(2,1));
+
+        northPenal.add(northLbl);
+        northPenal.add(northLbl2);
+
+        northLbl.setFont(new Font("Cooper Black",3,30));
+        northLbl.setHorizontalAlignment(JLabel.CENTER);
+
+        JPanel midPenal =new JPanel();
+        midPenal.setLayout(new FlowLayout());
+        JPanel midPenal2 =new JPanel();
+        midPenal2.setLayout(new FlowLayout());
+
+         midPenal.add(switchBtn);
+         midPenal2.add(settingBtn);
+
+        centerPenal.add(midPenal);
+        centerPenal.add(midPenal2);
+
+        add("Center",centerPenal);
+
+        add("South",switchMenuTimePenal);
+
+        add("North",northPenal);
+
+
 
 
     }
